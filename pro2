@@ -1,0 +1,28 @@
+import streamlit as st
+import time
+
+# Function to run the Pomodoro session
+def run_pomodoro(session_duration):
+    countdown_seconds = session_duration * 60
+
+    for i in range(countdown_seconds, -1, -1):
+        st.success(f'Time remaining: {i // 60} minutes')
+        time.sleep(1)
+
+    st.success('Time is up! Take a break.')
+    st.balloons()
+
+# Function to cancel the Pomodoro session
+def cancel_pomodoro():
+    st.error('Pomodoro session canceled.')
+
+# Creating the Streamlit app
+st.title("Pomodoro Timer")
+title = st.text_input('Enter the duration (in minutes) for your Pomodoro session:')
+
+if st.button('Start'):
+    session_duration = int(title)
+    run_pomodoro(session_duration)
+
+if st.button('Cancel'):
+    cancel_pomodoro()
